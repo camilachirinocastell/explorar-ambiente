@@ -34,17 +34,46 @@ nothing to run yet.
 - pnpm 11 (the exact version is pinned in `package.json` through the
   `packageManager` field)
 
+## Environment variables
+
+Each layer has its own template. Copy `backend/.env.example` to `backend/.env`
+and `frontend/.env.example` to `frontend/.env`, then replace the placeholders.
+Real `.env` files are ignored by Git and must never be committed.
+
+**Backend**
+
+| Variable | Description |
+|---|---|
+| `PORT` | Port the API listens on |
+| `NODE_ENV` | Runtime environment (`development`, `production`, `test`) |
+| `DATABASE_URL` | MongoDB Atlas connection string |
+| `JWT_SECRET` | Secret used to sign session tokens |
+| `PASSWORD_PEPPER` | Secret applied to passwords before hashing; must differ from `JWT_SECRET` |
+| `CLIENT_URL` | Frontend origin allowed by CORS |
+| `RESEND_API_KEY` | API key of the email service used for inquiry notifications |
+
+**Frontend**
+
+| Variable | Description |
+|---|---|
+| `VITE_API_URL` | Base URL of the API (`/api/v1` in production, proxied by Vercel). Exposed in the browser: never put secrets in `VITE_` variables |
+
 ## Repository structure
 
     .
+    ├── backend/
+    │   └── .env.example       # Backend environment variables template
+    ├── frontend/
+    │   └── .env.example       # Frontend environment variables template
     ├── .gitignore
     ├── LICENSE
     ├── README.md
     ├── package.json           # Root package and pinned pnpm version
     └── pnpm-workspace.yaml    # Workspace packages and pnpm security settings
 
-The `backend/` (Express API) and `frontend/` (React app) workspaces will be
-added as the project grows.
+The `backend/` (Express API) and `frontend/` (React app) workspaces currently
+only hold their environment variable templates; their source code will be added
+as the project grows.
 
 ## Git workflow
 
