@@ -1,0 +1,4 @@
+# .husky/pre-commit
+# Runs before every commit: fixes and formats only the staged files.
+
+pnpm exec lint-staged

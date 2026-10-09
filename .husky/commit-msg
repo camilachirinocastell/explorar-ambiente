@@ -1,0 +1,5 @@
+# .husky/commit-msg
+# Runs after writing the commit message: rejects it if it does not follow
+# the Conventional Commits rules defined in commitlint.config.mjs.
+
+pnpm exec commitlint --edit "$1"
