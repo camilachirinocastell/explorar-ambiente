@@ -1,0 +1,31 @@
+# .gitignore
+# Files and folders Git must never track: dependencies, build output,
+# real environment values, internal documents and local machine noise.
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+build/
+coverage/
+
+# Environment files with real values (never commit these)
+.env
+.env.*
+!.env.example
+
+# Internal working documents (never commit)
+PROJECT_BLUEPRINT*.md
+
+# Logs
+*.log
+pnpm-debug.log*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
