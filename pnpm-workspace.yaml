@@ -1,0 +1,16 @@
+# pnpm-workspace.yaml
+# Declares the monorepo packages and holds all pnpm settings
+# (since pnpm 11, .npmrc is only used for authentication and registries).
+
+# Workspace packages: one per layer, deployed independently
+packages:
+  - backend
+  - frontend
+
+# Supply-chain protection: do not install versions published less than
+# 7 days ago (value in minutes), so malicious releases can be flagged first
+minimumReleaseAge: 10080
+
+# Install-script policy: lifecycle scripts of dependencies are blocked unless
+# a package is explicitly approved here (package name: true)
+allowBuilds: {}
