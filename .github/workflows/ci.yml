@@ -1,0 +1,69 @@
+# .github/workflows/ci.yml
+# Continuous integration: formatting and lint checks for the whole repo, plus
+# one job per layer that runs its own build and test scripts when they exist.
+
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+
+# Read-only access: CI never needs to write to the repository
+permissions:
+  contents: read
+
+# Cancel superseded runs of the same branch
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Git hooks only make sense on a developer machine
+  HUSKY: 0
+
+jobs:
+  quality:
+    name: Format and lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      # Corepack installs the pnpm version pinned in package.json
+      - run: corepack enable
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm format:check
+      - run: pnpm lint
+
+  backend:
+    name: Backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: corepack enable
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # --if-present skips scripts that the layer does not define yet
+      - run: pnpm --filter backend run --if-present build
+      - run: pnpm --filter backend run --if-present test
+
+  frontend:
+    name: Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: corepack enable
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter frontend run --if-present build
+      - run: pnpm --filter frontend run --if-present test
