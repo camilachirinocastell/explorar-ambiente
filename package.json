@@ -1,0 +1,11 @@
+{
+  "name": "explorar-ambiente",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Fullstack platform for an environmental consultancy in La Pampa: public landing page and private admin dashboard.",
+  "license": "MIT",
+  "packageManager": "pnpm@11.23.0",
+  "engines": {
+    "node": ">=22"
+  }
+}
