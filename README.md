@@ -42,20 +42,20 @@ Real `.env` files are ignored by Git and must never be committed.
 
 **Backend**
 
-| Variable | Description |
-|---|---|
-| `PORT` | Port the API listens on |
-| `NODE_ENV` | Runtime environment (`development`, `production`, `test`) |
-| `DATABASE_URL` | MongoDB Atlas connection string |
-| `JWT_SECRET` | Secret used to sign session tokens |
+| Variable          | Description                                                               |
+| ----------------- | ------------------------------------------------------------------------- |
+| `PORT`            | Port the API listens on                                                   |
+| `NODE_ENV`        | Runtime environment (`development`, `production`, `test`)                 |
+| `DATABASE_URL`    | MongoDB Atlas connection string                                           |
+| `JWT_SECRET`      | Secret used to sign session tokens                                        |
 | `PASSWORD_PEPPER` | Secret applied to passwords before hashing; must differ from `JWT_SECRET` |
-| `CLIENT_URL` | Frontend origin allowed by CORS |
-| `RESEND_API_KEY` | API key of the email service used for inquiry notifications |
+| `CLIENT_URL`      | Frontend origin allowed by CORS                                           |
+| `RESEND_API_KEY`  | API key of the email service used for inquiry notifications               |
 
 **Frontend**
 
-| Variable | Description |
-|---|---|
+| Variable       | Description                                                                                                                      |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `VITE_API_URL` | Base URL of the API (`/api/v1` in production, proxied by Vercel). Exposed in the browser: never put secrets in `VITE_` variables |
 
 ## Repository structure

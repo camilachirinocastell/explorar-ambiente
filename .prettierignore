@@ -1,0 +1,5 @@
+# .prettierignore
+# Files Prettier must not rewrite.
+
+pnpm-lock.yaml
+LICENSE

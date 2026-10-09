@@ -1,0 +1,7 @@
+# .prettierrc.yaml
+# Prettier formatting rules for the whole monorepo.
+
+semi: true
+singleQuote: true
+printWidth: 100
+endOfLine: lf
