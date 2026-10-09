@@ -1,0 +1,9 @@
+# .lintstagedrc.yaml
+# Tasks run on staged files before each commit. The patterns do not overlap,
+# so tasks never edit the same file at the same time.
+
+'*.{js,mjs,cjs,ts,tsx}':
+  - eslint --fix
+  - prettier --write
+
+'*.{json,md,yaml,yml,css,html}': prettier --write
