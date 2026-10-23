@@ -1,0 +1,19 @@
+// backend/tsconfig.json
+// TypeScript compiler settings for the API: strict checking, Node.js module
+// resolution and output to dist/. Every option is explicit because
+// TypeScript 6 changed several defaults.
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "types": ["node"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "sourceMap": true
+  },
+  "include": ["src"]
+}
