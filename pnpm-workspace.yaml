@@ -13,4 +13,6 @@ minimumReleaseAge: 10080
 
 # Install-script policy: lifecycle scripts of dependencies are blocked unless
 # a package is explicitly approved here (package name: true)
-allowBuilds: {}
+allowBuilds:
+  # Used by tsx. It works through its platform binary, so the script is not needed
+  esbuild: false
