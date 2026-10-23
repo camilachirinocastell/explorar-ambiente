@@ -1,7 +1,9 @@
 // backend/src/server.ts
-// Backend entry point. For now it validates the environment, opens the MongoDB
-// connection and closes it cleanly on shutdown; the HTTP server is added later.
+// Backend entry point. It validates the environment, opens the MongoDB connection
+// and starts the HTTP server built in app.ts. On shutdown it stops accepting
+// requests and then closes the database connection.
 
+import { app } from './app';
 import { connectDatabase, disconnectDatabase } from './config/db.config';
 import { env } from './config/env.config';
 
@@ -10,12 +12,17 @@ async function main(): Promise<void> {
 
   await connectDatabase();
 
-  const shutdown = async (): Promise<void> => {
-    await disconnectDatabase();
-    process.exit(0);
+  const server = app.listen(env.PORT, () => {
+    console.log(`API listening on port ${env.PORT}`);
+  });
+
+  const shutdown = (): void => {
+    server.close(() => {
+      void disconnectDatabase().finally(() => process.exit(0));
+    });
   };
-  process.on('SIGINT', () => void shutdown());
-  process.on('SIGTERM', () => void shutdown());
+  process.on('SIGINT', shutdown);
+  process.on('SIGTERM', shutdown);
 }
 
 main().catch((error: unknown) => {
