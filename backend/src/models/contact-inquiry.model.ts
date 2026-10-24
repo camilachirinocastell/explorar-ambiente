@@ -8,9 +8,9 @@ import { model, Schema } from 'mongoose';
 import type { IContactInquiry } from '../types/domain.types';
 import { CLIENT_TYPES, INQUIRY_STATUSES, SERVICE_TYPES } from '../types/domain.types';
 
-// Mongoose manages the id and the timestamps itself, so they are not declared
-// in the schema.
-type ContactInquiryAttributes = Omit<IContactInquiry, 'id' | 'createdAt' | 'updatedAt'>;
+// Mongoose manages the id itself, so it is not declared in the schema. The timestamps
+// stay in the type because the service reads them; the timestamps option fills them in.
+type ContactInquiryAttributes = Omit<IContactInquiry, 'id'>;
 
 const contactInquirySchema = new Schema<ContactInquiryAttributes>(
   {

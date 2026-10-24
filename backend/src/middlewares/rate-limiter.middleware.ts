@@ -23,3 +23,17 @@ export const loginLimiter = rateLimit({
     );
   },
 });
+
+// Public contact form: 5 inquiries per IP every hour. Enough for a real person who
+// fixes a mistake and sends again, and a small ceiling for automated spam
+export const inquiryLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 5,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  handler: (_req, _res, next) => {
+    next(
+      new AppError(429, 'TOO_MANY_INQUIRIES', 'Too many inquiries sent, please try again later'),
+    );
+  },
+});
