@@ -12,6 +12,7 @@ import { env } from './config/env.config';
 import { errorHandler, notFoundHandler } from './middlewares/error.middleware';
 import { authRouter } from './routes/auth.routes';
 import { healthRouter } from './routes/health.routes';
+import { inquiryRouter } from './routes/inquiry.routes';
 import { AppError } from './utils/app-error';
 
 export const app = express();
@@ -22,7 +23,7 @@ app.use(helmet());
 app.use(cors({ origin: new URL(env.CLIENT_URL).origin, credentials: true }));
 
 // General limit per IP, applied before body parsing so malformed requests and
-// unknown routes count too. Sensitive routes (login, inquiries) get stricter limits later
+// unknown routes count too. Sensitive routes (login, inquiries) have stricter limits
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 100,
@@ -40,6 +41,7 @@ app.use(cookieParser());
 
 app.use('/api/v1', healthRouter);
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/inquiries', inquiryRouter);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
