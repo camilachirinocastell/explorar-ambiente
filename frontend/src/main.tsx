@@ -1,9 +1,10 @@
 // frontend/src/main.tsx
-// Entry point of the React app: mounts <App /> in the #root element of index.html
-// and loads the global styles.
+// Entry point of the React app: mounts <App /> inside the router in the #root
+// element of index.html and loads the global styles.
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import './styles/index.css';
 
@@ -12,6 +13,8 @@ if (!rootElement) throw new Error('Root element #root not found');
 
 createRoot(rootElement).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>,
 );
