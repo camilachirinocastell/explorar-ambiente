@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "description": "React web app: public landing page and private admin dashboard.",
   "scripts": {
     "dev": "vite",
