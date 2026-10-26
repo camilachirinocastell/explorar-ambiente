@@ -1,0 +1,47 @@
+/* frontend/src/styles/index.css
+   Global styles: loads Tailwind and defines the design tokens sampled from the
+   logo (palette and fonts). Each token also becomes a Tailwind utility, for example
+   bg-primary, text-primary-light or font-heading. */
+
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #264a2c;
+  --color-primary-light: #3c6c3f;
+  --color-secondary: #a2c866;
+  --color-accent: #c3c348;
+  --color-bg-main: #fbf0e0;
+  --color-bg-card: #ffffff;
+  --color-text-main: #1f2922;
+
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+@layer base {
+  /* Smooth scroll to the landing sections, leaving room for the sticky navbar */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+  }
+}
