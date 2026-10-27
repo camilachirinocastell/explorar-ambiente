@@ -1,12 +1,14 @@
 // frontend/src/pages/Home.tsx
-// Public landing page. The sections exist so the navbar anchors work; each one is
-// replaced by its real content in the landing branches.
+// Public landing page. The about, services and coverage sections are placeholders so
+// the navbar anchors work; each one is replaced by its real content in the landing
+// branches. The contact section already has the real form.
 
-const SECTIONS = [
+import { ContactForm } from '../components/ContactForm';
+
+const PLACEHOLDER_SECTIONS = [
   { id: 'about', title: 'Sobre mí' },
   { id: 'services', title: 'Servicios' },
   { id: 'coverage', title: 'Cobertura' },
-  { id: 'contact', title: 'Contacto' },
 ];
 
 export function Home() {
@@ -25,12 +27,20 @@ export function Home() {
         </a>
       </section>
 
-      {SECTIONS.map((section) => (
+      {PLACEHOLDER_SECTIONS.map((section) => (
         <section key={section.id} id={section.id} className="mx-auto max-w-6xl px-4 py-16">
           <h2 className="text-2xl font-bold">{section.title}</h2>
           <p className="mt-2">Contenido próximamente.</p>
         </section>
       ))}
+
+      <section id="contact" className="mx-auto max-w-3xl px-4 py-16">
+        <h2 className="text-2xl font-bold">Contacto</h2>
+        <p className="mt-2">Contanos qué necesitás y te respondemos a la brevedad.</p>
+        <div className="mt-8 rounded-2xl bg-bg-card p-6 shadow-sm md:p-8">
+          <ContactForm />
+        </div>
+      </section>
     </>
   );
 }
