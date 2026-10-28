@@ -1,7 +1,7 @@
 // frontend/src/constants/inquiry-options.ts
-// Allowed values of the contact form and the texts shown for each one. The values
-// must match backend/src/types/domain.types.ts: the monorepo does not share code
-// between layers yet, so a change there needs the same change here.
+// Allowed values of the contact form and the admin panel, and the texts shown for each
+// one. The values must match backend/src/types/domain.types.ts: the monorepo does not
+// share code between layers yet, so a change there needs the same change here.
 
 export const CLIENT_TYPES = ['individual_producer', 'company', 'municipality'] as const;
 export type ClientType = (typeof CLIENT_TYPES)[number];
@@ -36,4 +36,14 @@ export const SERVICE_LABELS: Record<ServiceType, string> = {
   environmental_education: 'Educación ambiental',
   urban_forestry: 'Asesoramiento en arbolado urbano para frentistas y municipios',
   other: 'Otro',
+};
+
+// Workflow of an inquiry in the admin panel: new ones arrive as "pending"
+export const INQUIRY_STATUSES = ['pending', 'reviewed', 'contacted'] as const;
+export type InquiryStatus = (typeof INQUIRY_STATUSES)[number];
+
+export const INQUIRY_STATUS_LABELS: Record<InquiryStatus, string> = {
+  pending: 'Pendiente',
+  reviewed: 'Revisada',
+  contacted: 'Contactada',
 };
