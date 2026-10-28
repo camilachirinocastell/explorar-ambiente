@@ -8,7 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ProtectedRoute } from '../components/ProtectedRoute';
 import { AdminLayout } from '../layouts/AdminLayout';
 import { PublicLayout } from '../layouts/PublicLayout';
-import { AdminHome } from '../pages/AdminHome';
+import { AdminInquiries } from '../pages/AdminInquiries';
 import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
 import { NotFound } from '../pages/NotFound';
@@ -32,7 +32,7 @@ export function AppRoutes() {
 
       <Route path="admin" element={<ProtectedRoute />}>
         <Route element={<AdminLayout />}>
-          <Route index element={<AdminHome />} />
+          <Route index element={<AdminInquiries />} />
         </Route>
       </Route>
     </Routes>
