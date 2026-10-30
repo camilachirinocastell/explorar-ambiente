@@ -22,6 +22,8 @@ const envSchema = z
     PASSWORD_PEPPER: secret,
     CLIENT_URL: z.url(),
     RESEND_API_KEY: z.string().startsWith('re_', 'must start with re_'),
+    // How many reverse proxies sit in front of the API (0 when running locally)
+    TRUST_PROXY_HOPS: z.coerce.number().int().min(0).max(5).default(0),
   })
   // The pepper protects password hashes even if JWT_SECRET leaks, so they must differ
   .refine((env) => env.JWT_SECRET !== env.PASSWORD_PEPPER, {

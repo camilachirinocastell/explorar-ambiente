@@ -1,5 +1,5 @@
 // backend/src/app.ts
-// Builds the Express application: security headers, CORS with credentials,
+// Builds the Express application: proxy trust, security headers, CORS with credentials,
 // general rate limit, body and cookie parsing, routes and the global error handling.
 // It does not listen on a port, so tests can import it; server.ts starts it.
 
@@ -16,6 +16,14 @@ import { inquiryRouter } from './routes/inquiry.routes';
 import { AppError } from './utils/app-error';
 
 export const app = express();
+
+// Behind Vercel and Render the address of the socket is always a proxy. Trusting the right
+// number of hops makes req.ip the visitor's address, which every rate limit depends on:
+// with too few hops all visitors would share one limit, with too many a visitor could fake
+// their IP. The value comes from TRUST_PROXY_HOPS (0 locally, where there is no proxy)
+if (env.TRUST_PROXY_HOPS > 0) {
+  app.set('trust proxy', env.TRUST_PROXY_HOPS);
+}
 
 app.use(helmet());
 
